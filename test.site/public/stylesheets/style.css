@@ -1,12 +1,19 @@
 body {
   padding: 50px;
+  padding-top: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #131313;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+  color: #61a0a8;
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
 
 .emp {
   color: #c23531;
@@ -18,7 +25,6 @@ ul {
 li:before {
   content: '\002022';
   font-size: 20px;
-  font-family: "Webdings";
   color: #61a0a8;
   vertical-align: middle;
   padding-right: 5px;

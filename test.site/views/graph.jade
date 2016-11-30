@@ -3,8 +3,12 @@ extends layout
 head
   block js
     script(src="/scripts/echarts.min.js").
+  
 body
   block content  
+    a(href="./") < Back
+    <br>
+    <br>
     h1= title
     <br>
     <hr>
@@ -19,7 +23,6 @@ body
     <br>
     #volumechart(style="width: 100%; height: 500px;")
 footer
-
   block scripts
     script.
       //echarts = require('echarts')

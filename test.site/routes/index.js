@@ -65,7 +65,6 @@ toGraph = function(dbname, req, res) {
 			chartcandleOptions.series[0].data = toGraphCandlesticks;
 			chartcandleOptions.series[1].data = toGraphClose;
 			chartvolumeOptions.series[0].data = toGraphVolume;
-			;
 
 			chartcandleOptions.xAxis[0].data = toLabelxAxis;
 			chartvolumeOptions.xAxis[0].data = toLabelxAxis;
