@@ -1,0 +1,40 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #131313;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.emp {
+  color: #c23531;
+}
+
+ul {
+  padding-left: 10px;
+}
+li:before {
+  content: '\002022';
+  font-size: 20px;
+  font-family: "Webdings";
+  color: #61a0a8;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+li {
+  margin: 0.5px;
+  list-style-type: none;
+}
+
+h2 {
+  color: #2f4554;
+}
+
+h6 {
+  color: #636363;
+}
+
+

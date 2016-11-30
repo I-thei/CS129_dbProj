@@ -1,0 +1,40 @@
+extends layout
+
+head
+  block js
+    script(src="/scripts/echarts.min.js").
+body
+  block content  
+    h1= title
+    <br>
+    <hr>
+    #candlechart(style="width: 100%; height: 500px;")
+    <br>
+    <br>
+    #linechart(style="width: 100%; height: 500px;")
+    <br>
+    <br>
+    #sdchart(style="width: 100%; height: 500px;")
+    <br>
+    <br>
+    #volumechart(style="width: 100%; height: 500px;")
+footer
+
+  block scripts
+    script.
+      //echarts = require('echarts')
+      var mycandleChart = echarts.init(document.getElementById('candlechart'))
+      var mylineChart = echarts.init(document.getElementById('linechart'))
+      var mysdChart = echarts.init(document.getElementById('sdchart'))
+      var myvolumeChart = echarts.init(document.getElementById('volumechart'))
+
+      var chartcandleOptions = !{chartcandledata}
+      var chartlineOptions = !{chartlinedata}
+      var chartsdOptions = !{chartsddata}
+      var chartvolumeOptions = !{chartvolumedata}
+
+      mycandleChart.setOption(chartcandleOptions)
+      mylineChart.setOption(chartlineOptions)
+      myvolumeChart.setOption(chartvolumeOptions)
+      mysdChart.setOption(chartsdOptions)
+  

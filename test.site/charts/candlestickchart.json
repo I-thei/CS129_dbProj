@@ -1,0 +1,51 @@
+{
+    "title" : {
+        "text": "Index of [name of company]"
+    },
+    "tooltip" : {
+        "trigger": "axis"
+    },
+    "legend": {
+        "data":["#averages"]
+    },
+
+    "dataZoom" : {
+        "show" : true,
+        "realtime": true,
+        "start" : 50,
+        "end" : 100
+    },
+
+    "xAxis" : [
+        {
+            "type" : "category",
+            "boundaryGap" : true,
+            "axisTick": {"onGap":false},
+            "splitLine": {"show":false},
+            "data" : []
+        }
+
+    ],
+    
+    "yAxis" : [
+        {
+            "type" : "value",
+             "scale" :true,
+            "boundaryGap": [0.01, 0.01]
+        }
+    ],
+
+    "series" : [
+        {
+            "name": "Index",
+            "type": "k",
+            "data":[]
+        },
+        { 
+            "name":"Close",
+            "type":"line",
+            "data":[]
+        }
+    ]
+}
+                    
