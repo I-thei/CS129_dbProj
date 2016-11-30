@@ -29,11 +29,6 @@
             "type" : "value",
              "scale" :true,
             "boundaryGap": [0.01, 0.01]
-        },
-        {
-            "type" : "value",
-             "scale" :true,
-            "boundaryGap": [0.01, 0.01]
         }
     ],
 
