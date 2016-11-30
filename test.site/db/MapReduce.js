@@ -1,5 +1,3 @@
-
-
 var map = function(){
 	var documentDate = this.date.split('-');
 	var year = documentDate[0];
@@ -14,13 +12,8 @@ var reduce = function(key, values) {
 var finalize = function(key, value){
 	var total = value.adj_close.reduce(function(x,y){return x + y;}, 0);
 	var average = (total / value.adj_close.length);
-	var standard_deviation = 0;
-	for (var i = 0; i < value.adj_close.length; i++){
-		standard_deviation += Math.pow((value.adj_close[i] - average), 2); 
-	}
-	standard_deviation = Math.sqrt(standard_deviation / value.adj_close.length);
-
-	return {adj_close: total, count: value.adj_close.length, average: average, sd: standard_deviation};
+	var standard_deviation = Math.sqrt(value.adj_close.reduce(function(x,y){return x + Math.pow((y - average), 2);}, 0));
+	return {total: total, count: value.adj_close.length, average: average, sd: standard_deviation};
 }
 
 resultsfb = 
