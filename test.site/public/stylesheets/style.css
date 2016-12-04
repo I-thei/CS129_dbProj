@@ -43,4 +43,33 @@ h6 {
   color: #636363;
 }
 
+table {
+  width: 100%;
+  border: #61a0a8;
+  border-style: solid;
+  border-width: 1px;
+}
+
+th {
+  height: 25px;
+  color: #fdfdfd;
+  padding: 10px;
+  border-width: 0px;
+  font-size: 12pt;
+}
+
+thead {
+  background-color: #61a0a8;
+}
+
+tr.odd {
+  background-color: #f3f3f3;
+
+}
+
+
+td {
+  width: 25%;
+  text-align: center;
+}
 

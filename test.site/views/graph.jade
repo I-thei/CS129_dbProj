@@ -20,7 +20,36 @@ body
     <br>
     #sdchart(style="width: 100%; height: 500px;")
     <br>
+    h3 SD Report:
+    p Average SD: #{averagesd}
+
+    a#show(href = "#hide" onclick="show('report_table', 'show', 'hide');") Show Reports 
+    a#hide(href = "#show" onclick="hide('report_table', 'hide', 'show');" style = "display: none;") Hide Reports 
     <br>
+    div#report_table(style = "display: none;")
+      table
+        thead
+          tr 
+            th Month
+            th SD > 1
+            th 1 <= SD <= 2
+            th 2 < SD
+
+        tbody
+          each sd, i in sdlist
+            tr(class=(i % 2 == 0) ? 'odd' : 'even')
+              td
+                p #{sd[0]}
+              td 
+                p #{sd[1]}
+              td 
+                p #{sd[2]}
+              td 
+                p #{sd[3]}
+
+    <br>
+    <br>
+    <hr>
     #volumechart(style="width: 100%; height: 500px;")
 footer
   block scripts
@@ -40,4 +69,18 @@ footer
       mylineChart.setOption(chartlineOptions)
       myvolumeChart.setOption(chartvolumeOptions)
       mysdChart.setOption(chartsdOptions)
+
+      function show(id, btn, hide){
+        document.getElementById(id).style.display = "block";
+        document.getElementById(hide).style.display = "block";
+        document.getElementById(btn).style.display = "none";
+      }
+
+      function hide(id, btn, show) {
+        document.getElementById(show).style.display = "block";
+        document.getElementById(id).style.display = "none";
+        document.getElementById(btn).style.display = "none";
+      }        
+
+
   

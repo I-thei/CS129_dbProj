@@ -23,7 +23,7 @@ var finalize = function(key, value){
 	return value;
 }
 
-resultsaapl = db.runCommand({
+results2aapl = db.runCommand({
 	mapReduce: 'aapl.report',
 	map: mapApple,
 	reduce: reduce,
@@ -31,7 +31,7 @@ resultsaapl = db.runCommand({
 	out: 'aapl.sd'
 })
 
-resultsgoog = db.runCommand({
+results2goog = db.runCommand({
 	mapReduce: 'goog.report',
 	map: mapGoogle,
 	reduce: reduce,
@@ -39,7 +39,7 @@ resultsgoog = db.runCommand({
 	out: 'goog.sd'
 })
 
-resultsfb = db.runCommand({
+results2fb = db.runCommand({
 	mapReduce: 'fb.report',
 	map: mapFacebook,
 	reduce: reduce,

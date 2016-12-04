@@ -36,6 +36,7 @@ toGraph = function(dbname, req, res) {
 	var SD = [];
 	var toLabelxAxis = [];
 	var toLabelxxAxis = [];
+	var sd_level= [];
 
 	var chartcandleOptions = clone(candlechart);
 	var chartlineOptions = clone(linechart);
@@ -55,13 +56,23 @@ toGraph = function(dbname, req, res) {
 			console.log('Connected successfully to database');
 			var collection = db.collection(dbname);
 			console.log('Accessing collection ' + dbname);
-			collection.find({}).forEach(function(u){
-				toGraphCandlesticks.unshift([u.open, u.close, u.low, u.high]);
-				toGraphClose.unshift(u.adj_close);
-				toGraphVolume.unshift(u.volume);
-				toLabelxAxis.unshift(u.date);
-				}); 
-
+			collection.find({}).toArray(function(err,result){
+				if(err){
+					res.send(err)
+				}
+				else if (result.length){
+					result.forEach(function(u){
+						toGraphCandlesticks.unshift([u.open, u.close, u.low, u.high]);
+						toGraphClose.unshift(u.adj_close);
+						toGraphVolume.unshift(u.volume);
+						toLabelxAxis.unshift(u.date);
+					}); 
+				}
+				else {
+					console.log("No documents found");
+				}
+			}); 
+				
 			chartcandleOptions.series[0].data = toGraphCandlesticks;
 			chartcandleOptions.series[1].data = toGraphClose;
 			chartvolumeOptions.series[0].data = toGraphVolume;
@@ -72,21 +83,42 @@ toGraph = function(dbname, req, res) {
 
 			var report = db.collection(dbname +'.report');
 			console.log('Accessing collection '+ dbname + '.report');
-			report.find({}).forEach(function(u){
-				toGraphAverage.push(u.value.average);
-				SD.push(u.value.sd);
-				toGraphSDUpperBound.push(u.value.average + u.value.sd);
-				toGraphSDLowerBound.push(u.value.average - u.value.sd);
-				toLabelxxAxis.push(u._id.month);
-				}); 
+			report.find({}).toArray(function(err,result){
+				if(err){
+					res.send(err)
+				} else if (result.length){
+					result.forEach(function(u){
+						toGraphAverage.push(u.value.average);
+						SD.push(u.value.sd);
+						toGraphSDUpperBound.push(u.value.average + u.value.sd);
+						toGraphSDLowerBound.push(u.value.average - u.value.sd);
+						toLabelxxAxis.push(u._id.month);
+						sd_level.push([u._id.month, u.value.within_one_sd, u.value.one_to_two_sd, u.value.beyond_two_sd]);
+					}); 
+					
+					chartlineOptions.series[0].data = toGraphSDLowerBound;
+					chartlineOptions.series[1].data = toGraphSDUpperBound;
+					chartlineOptions.series[2].data = toGraphAverage;
+					chartsdOptions.series[0].data = SD;
+					chartlineOptions.xAxis[0].data = toLabelxxAxis;
+					chartsdOptions.xAxis[0].data = toLabelxxAxis;
+
+				} else {
+					console.log('No documents found');
+				}
+			});
 
 
-			chartlineOptions.series[0].data = toGraphSDLowerBound;
-			chartlineOptions.series[1].data = toGraphSDUpperBound;
-			chartlineOptions.series[2].data = toGraphAverage;
-			chartsdOptions.series[0].data = SD;
-			chartlineOptions.xAxis[0].data = toLabelxxAxis;
-			chartsdOptions.xAxis[0].data = toLabelxxAxis;
+			var sdreport = db.collection(dbname +'.sd');
+			sdreport.find({}).toArray(function(err,result){
+				if(err){
+					res.send(err)
+				} else if (result.length) {
+					averagesd = result[0].value.average_sd;
+				} else {
+					console.log('No documents found');
+				}
+			});
 
 			collection.find({}).toArray(function(err,result){
 				if(err){
@@ -100,6 +132,8 @@ toGraph = function(dbname, req, res) {
 						chartcandledata: JSON.stringify(chartcandleOptions),
 						chartvolumedata: JSON.stringify(chartvolumeOptions), 
 						chartsddata: JSON.stringify(chartsdOptions),
+						average_sd: averagesd,
+						sdlist: sd_level
 					});
 				} else {
 					res.send('No documents found');

@@ -35,7 +35,7 @@
 
     "series" : [
         { 
-            "name":"SD",
+            "name":"SD Average",
             "type":"line",
             "data":[]
         }
