@@ -8,3 +8,8 @@ Our implementation simplifies the problem by taking an average of the adjusted c
 
 #Volatility
 This problem requires the calculation of standard deviations, which is also a measure of volatility. A high standard deviation in the price of stocks of a certain company can help determine which stocks are “risky” (volatile) stocks, or safe stocks. We took stock data from prominent companies such as Facebook, Apple, and Google.
+
+
+#To start
+
+Open terminal in 'CS129_dbProj/test.site' directory. Run command 'npm start'.
