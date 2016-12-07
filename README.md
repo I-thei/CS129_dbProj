@@ -12,4 +12,6 @@ This problem requires the calculation of standard deviations, which is also a me
 
 #To start
 
-Open terminal in 'CS129_dbProj/test.site' directory. Run command 'npm start'.
+1. Instantiate mongod instance with dbpath 'CS129_dbProj/test.site/db/data' on port 27011.
+2. Open terminal in 'CS129_dbProj/test.site' directory. 
+3. Run command 'npm start'.
